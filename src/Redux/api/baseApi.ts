@@ -1,23 +1,30 @@
-import { BaseQueryApi, BaseQueryFn, createApi, DefinitionType, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  BaseQueryApi,
+  BaseQueryFn,
+  createApi,
+  DefinitionType,
+  FetchArgs,
+  fetchBaseQuery,
+} from "@reduxjs/toolkit/query/react";
 
 import { toast } from "sonner";
 import { logout, setUser } from "../features/auth/authSlice";
 import { RootState } from "../store"; // Assuming your RootState is exported from here
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://e-commerce-backend-two-zeta.vercel.app/api/v1',
-  credentials: 'include',
-  prepareHeaders: (headers, { getState }) => { // Add { getState } parameter
+  baseUrl: "https://e-commerce-backend-seven-beta.vercel.app/api/v1",
+  credentials: "include",
+  prepareHeaders: (headers, { getState }) => {
+    // Add { getState } parameter
     const token = (getState() as RootState).auth.token; // Use getState() to access the token
     if (token) {
-      headers.set('authorization', `${token}`)
+      headers.set("authorization", `${token}`);
     }
     return headers;
-  }
+  },
+});
 
-})
-
-// token expired hola new refresh token generate code 
+// token expired hola new refresh token generate code
 const baseQueryWithRefreshToken: BaseQueryFn<
   FetchArgs,
   BaseQueryApi,
@@ -25,16 +32,19 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 > = async (args, api, extraOptions): Promise<any> => {
   let result = await baseQuery(args, api, extraOptions);
   if (result?.error?.status === 404) {
-    toast.error((result?.error?.data as any)?.message)
+    toast.error((result?.error?.data as any)?.message);
   }
   if (result?.error?.status === 403) {
-    toast.error((result?.error?.data as any)?.message)
+    toast.error((result?.error?.data as any)?.message);
   }
   if (result?.error?.status === 401) {
-    const res = await fetch('https://e-commerce-backend-two-zeta.vercel.app/api/v1/auth/refresh-token', {
-      method: 'POST',
-      credentials: 'include',
-    });
+    const res = await fetch(
+      "https://e-commerce-backend-seven-beta.vercel.app/api/v1/auth/refresh-token",
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
 
     const data = await res.json();
 
@@ -59,10 +69,8 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 };
 
 export const baseApi = createApi({
-  reducerPath: 'baseApi',
+  reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ['admins','users','categories','products','cart','orders'],
-  endpoints: () => ({
-
-  })
-})
+  tagTypes: ["admins", "users", "categories", "products", "cart", "orders"],
+  endpoints: () => ({}),
+});
