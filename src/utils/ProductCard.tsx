@@ -42,6 +42,7 @@ const cardVariants = {
   };
 
 const ProductCard: React.FC<{ product: Product, index: number }> = ({ product, index }) => {
+  console.log(product);
 
     return (
         <motion.div
@@ -54,11 +55,11 @@ const ProductCard: React.FC<{ product: Product, index: number }> = ({ product, i
             className="bg-white  rounded-lg shadow-md overflow-hidden flex flex-col relative group cursor-pointer"
         >
             <div className="relative pb-[66.66%]"> {/* Aspect ratio container for image */}
-                <img
+                {/* <img
                     src={product?.image[0]}
                     alt={product?.name}
                     className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
+                /> */}
                 <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
                     Featured
                 </span>

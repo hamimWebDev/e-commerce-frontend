@@ -129,8 +129,8 @@ const AllProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const reviewCount = product.ratingsCount ?? 0; // Use ratingsCount, default to 0
 
     return (
-        <Link to={`/product/${product._id}`} className="border border-gray-200 rounded-lg overflow-hidden bg-white flex flex-col shadow-sm hover:shadow-lg transition-shadow duration-300 ease-in-out group">
-            <div className="relative w-full pt-[75%] bg-gray-100"> {/* Aspect ratio container */}
+        <Link to={`/product/${product._id}`} className=" rounded-lg overflow-hidden  flex flex-col  transition-shadow duration-300 ease-in-out group">
+            <div className="relative w-full pt-[75%]"> {/* Aspect ratio container */}
                 <img
                     src={product.images?.[0]} // Use images[0] directly
                     alt={product.title} // Use title
