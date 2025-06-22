@@ -11,7 +11,7 @@ import { toast } from "sonner";
 const Login = () => {
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("admin@gmail.com");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login] = useLoginMutation();
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ const Login = () => {
         transition={{ duration: 0.5 }}
         className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg"
       >
-        <div>
+        <div className="flex flex-col items-center gap-3">
           <motion.h2
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -61,6 +61,32 @@ const Login = () => {
           >
             Sign in to your account
           </motion.h2>
+          <div className="flex gap-4 mt-2">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              type="button"
+              className="px-4 py-2 bg-blue-100 text-blue-700 rounded-md border border-blue-300 shadow-sm hover:bg-blue-200 transition"
+              onClick={() => {
+                setEmail("admin@gmail.com");
+                setPassword("admin123456");
+              }}
+            >
+              Admin Credentials
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              type="button"
+              className="px-4 py-2 bg-green-100 text-green-700 rounded-md border border-green-300 shadow-sm hover:bg-green-200 transition"
+              onClick={() => {
+                setEmail("user@gmail.com");
+                setPassword("user123457");
+              }}
+            >
+              User Credentials
+            </motion.button>
+          </div>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md space-y-4">
